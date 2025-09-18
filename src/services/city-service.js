@@ -22,9 +22,9 @@ async function createCity(data){
     }
 }
 
-async function destroyCity(name) {
+async function destroyCity(id) {
     try {
-        const response =  await cityRepository.destroy(name);
+        const response =  await cityRepository.destroy(id);
         return response;
     } catch (error) {
         if (error.statusCode === StatusCodes.NOT_FOUND) {

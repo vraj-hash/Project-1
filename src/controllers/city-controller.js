@@ -1,4 +1,4 @@
-const {CityService}=require('../services');
+const {CityService}=require('../services/index');
 const { StatusCodes }=require('http-status-codes'); 
 const { SuccessResponse,ErrorResponse }=require('../utils/common');
 
@@ -27,7 +27,7 @@ async function createCity(req,res){
 async function destroyCity(req, res) {
     try {
         // console.log("Request",req.params);
-        const city = await CityService.destroyCity(req.params.name);
+        const city = await CityService.destroyCity(req.params.id);
         SuccessResponse.data = city;
         return res.status(StatusCodes.OK).json(SuccessResponse);
     } catch (error) {

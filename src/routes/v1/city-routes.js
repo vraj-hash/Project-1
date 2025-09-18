@@ -7,7 +7,7 @@ const { CityMiddlewares}=require('../../middlewares');
 router.post('/',CityMiddlewares.validateCreateRequest,CityController.createCity);
 
 // /api/v1/cities/:name DELETE request
-router.delete('/:name', CityController.destroyCity);
+router.delete('/:id', CityController.destroyCity);
 
 
 module.exports=router; 
