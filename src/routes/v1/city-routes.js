@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { CityController }=require('../../controllers');
-// const { AirplaneMiddlewares}=require('../../middlewares');
+const { CityMiddlewares}=require('../../middlewares');
 
 // /api/v1/cities POST request
-router.post('/',CityController.createCity);
+router.post('/',CityMiddlewares.validateCreateRequest,CityController.createCity);
 
 
-module.exports=router;
+module.exports=router; 
