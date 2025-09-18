@@ -1,5 +1,5 @@
 'use strict';
-
+const {Op}=require('sequelize');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -35,6 +35,6 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      * 
      */
-    // await queryInterface.bulkDelete('Airplane', null, {})
+    await queryInterface.bulkDelete('Airplanes', null, {[Op.or]:[{modelNumber : "boing123"},{modelNumber : "alpha1"}]});
   }
 };
