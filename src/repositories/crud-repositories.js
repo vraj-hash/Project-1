@@ -13,11 +13,13 @@ class CrudRepository {
   }
 
   async destroy(data) {
+    console.log("--------------",data);
     const response = await this.model.destroy({
       where: {
         id: data,
       },
     });
+    // console.log("----------",response);
     if(!response)
     {
       throw new AppError('Not able to find the Resources',StatusCodes.NOT_FOUND);

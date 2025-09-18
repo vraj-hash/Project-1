@@ -6,7 +6,7 @@ const airplaneRoutes = require('./airplane-route');
 const cityRoutes = require('./city-routes.js');
 
 router.use('/airplanes',airplaneRoutes);
-router.use('/cities',cityRoutes);
+router.use('/city',cityRoutes);
 
 router.get('/info',InfoController.info);
 
