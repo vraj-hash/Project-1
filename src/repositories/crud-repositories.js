@@ -45,6 +45,11 @@ class CrudRepository {
         id: id,
       },
     });
+    
+    if (!response[0]) { 
+    throw new AppError('Not able to update the Resource', StatusCodes.NOT_FOUND);
+  }
+
     return response;
   }
 }
