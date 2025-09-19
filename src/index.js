@@ -2,7 +2,7 @@ const express = require('express');
 
 const {ServerConfig , Logger} = require('./config');
 const apiRoutes = require('./routes');
-const { or } = require('sequelize');
+// const { or } = require('sequelize');
 
 const app = express();
 
@@ -11,10 +11,10 @@ app.use(express.urlencoded({extended:true}));
 
 app.use('/api',apiRoutes);
 
-app.listen(ServerConfig.PORT,async ()=>{
+app.listen(ServerConfig.PORT, ()=>{
     console.log(`Successfully created server at port ${ServerConfig.PORT}`);
 
-    
+
     // const {City,Airport} = require('./models');
     // const city = await City.findByPk(1);
     // console.log(city);
