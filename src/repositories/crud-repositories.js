@@ -13,7 +13,7 @@ class CrudRepository {
   }
 
   async destroy(cityId) {
-    console.log("--------------",cityId);
+    // console.log("--------------",cityId);
     const response = await this.model.destroy({
       where: {
         id: cityId,
