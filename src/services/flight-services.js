@@ -78,7 +78,54 @@ async function getAllFlights(query) {
   }
 }
 
+async function getFlight(flightId)
+{
+  try {
+    const flight = await flightRepository.getFlight(flightId);
+    return flight;
+  } catch (error) {
+    // console.log(error);
+    if (error.name == "SequelizeValidationError") {
+      let explanation = [];
+      error.errors.forEach((err) => {
+        explanation.push(err.message);
+      });
+
+      throw new AppError(explanation, StatusCodes.BAD_REQUEST);
+    }
+    throw new AppError(
+      "Cannot find a flight object",
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
+}
+
+
+async function updateFlight(flightId,data)
+{
+   try {
+    const response = await flightRepository.updateFlights(flightId,data);
+    return response;
+  } catch (error) {
+    // console.log(error);
+    if (error.name == "SequelizeValidationError") {
+      let explanation = [];
+      error.errors.forEach((err) => {
+        explanation.push(err.message);
+      });
+
+      throw new AppError(explanation, StatusCodes.BAD_REQUEST);
+    }
+    throw new AppError(
+      "Cannot update a flight object",
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
+}
+
 module.exports = {
   createFlight,
   getAllFlights,
+  getFlight,
+  updateFlight
 };
