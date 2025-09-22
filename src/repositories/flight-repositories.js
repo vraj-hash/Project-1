@@ -1,6 +1,7 @@
 const CrudRepository = require("./crud-repositories");
 const { Flight } = require("../models");
-
+const db = require('../models');
+const {Sequelize} = require('sequelize');
 class FlightRepository extends CrudRepository {
   constructor() {
     super(Flight);
@@ -19,22 +20,18 @@ class FlightRepository extends CrudRepository {
     return response;
   }
 
-  async updateFlights(flightId, data) {
-    try {
-      await Flight.update(data, {
-        where: {
-          id: flightId,
-        },
-      });
-      return true;
-    } catch (error) {
-      throw new AppError(
-        "Repository Error",
-        "Cannot update Booking",
-        "There was some issue update the booking, please try again",
-        StatusCodes.INTERNAL_SERVER_ERROR
-      );
+  async updateFlights(flightId, seats, dec = true) {
+     
+    await db.sequelize.query(`select  * from Flights where Flights.id = ${flightId} for update;`);
+    
+    const flight = await Flight.findByPk(flightId);
+   
+    if (parseInt(dec)) {
+      await flight.decrement("totalSeats", { by: seats });
+    } else {
+      await flight.increment("totalSeats", { by: seats });
     }
+    return flight; 
   }
 }
 

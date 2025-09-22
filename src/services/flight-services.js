@@ -101,25 +101,15 @@ async function getFlight(flightId)
 }
 
 
-async function updateFlight(flightId,data)
+async function updateFlight(data)
 {
-   try {
-    const response = await flightRepository.updateFlights(flightId,data);
+  try{
+    const response = await flightRepository.updateFlights(data.flightId,data.seats,data.dec);
     return response;
-  } catch (error) {
-    // console.log(error);
-    if (error.name == "SequelizeValidationError") {
-      let explanation = [];
-      error.errors.forEach((err) => {
-        explanation.push(err.message);
-      });
-
-      throw new AppError(explanation, StatusCodes.BAD_REQUEST);
-    }
-    throw new AppError(
-      "Cannot update a flight object",
-      StatusCodes.INTERNAL_SERVER_ERROR
-    );
+  } catch(error)
+  {
+    console.log(error);
+     throw new AppError('Cannot update the data of the flight',StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
 

@@ -55,7 +55,11 @@ async function getFlight(req, res) {
 
 async function updateFlight(req,res){
   try {
-    const response = await FlightService.updateFlight(req.params.id,req.body);
+    const response = await FlightService.updateFlight({
+      flightId:req.params.id,
+      seats:req.body.seats,
+      dec:req.body.dec
+    });
     SuccessResponse.data = response;
 
     return res.status(StatusCodes.CREATED).json(SuccessResponse);
