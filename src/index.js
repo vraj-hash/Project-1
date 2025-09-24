@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 app.use('/api',apiRoutes);
-
+console.log("Port isbnmvbfd",ServerConfig.PORT);
 app.listen(ServerConfig.PORT, ()=>{
     console.log(`Successfully created server at port ${ServerConfig.PORT}`);
 
